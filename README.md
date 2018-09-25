@@ -67,6 +67,6 @@ public class OrderProblemDetail : ProblemDetails
 }
     
  ```
- Also unhandled exceptions are caught by exception filter in development environment and its exception message is placed developerMessage section.
+ Unhandled exceptions are caught by exception filter in development environment and its exception message is placed developerMessage section.
  
  
