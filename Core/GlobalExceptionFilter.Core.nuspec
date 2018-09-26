@@ -13,10 +13,10 @@
     <copyright></copyright>
     <tags></tags>
     <dependencies>
-    <dependency  id="Microsoft.AspNetCore.Mvc.Coreversion" version="2.1.2" />
+    <dependency  id="Microsoft.AspNetCore.Mvc.Core" version="2.1.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\netcoreapp2.1\GlobalExceptionFilter.Core.dll" />
+    <file src="bin\Release\netcoreapp2.1\GlobalExceptionFilter.Core.dll"  target="lib/dotnet" />
   </files>
 </package>
