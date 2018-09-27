@@ -1,4 +1,4 @@
-﻿namespace Core
+﻿namespace App
 {
     public class JsonErrorResponse
     {

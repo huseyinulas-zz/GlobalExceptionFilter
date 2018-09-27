@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Net;
-
-using Core;
-
+using App;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GlobalExceptionFilter.Controllers
@@ -14,10 +12,10 @@ namespace GlobalExceptionFilter.Controllers
         public string GetV1()
         {
             throw new CustomApiException(new ProblemDetails()
-                                         {
-                                             Status = (int)HttpStatusCode.NotFound,
-                                             Detail = "Order cannot be found with id 3"
-                                         });
+            {
+                Status = (int)HttpStatusCode.NotFound,
+                Detail = "Order cannot be found with id 3"
+            });
         }
 
         [HttpGet("v2")]
@@ -30,11 +28,11 @@ namespace GlobalExceptionFilter.Controllers
         public string GetV3()
         {
             throw new CustomApiException(new ProblemDetails()
-                                         {
-                                             Title = "Order Error!",
-                                             Detail = "Order cannot be found with id 3",
-                                             Status = (int)HttpStatusCode.NotFound
-                                         });
+            {
+                Title = "Order Error!",
+                Detail = "Order cannot be found with id 3",
+                Status = (int)HttpStatusCode.NotFound
+            });
         }
 
         [HttpGet("v4")]
@@ -47,23 +45,23 @@ namespace GlobalExceptionFilter.Controllers
         public string GetV5()
         {
             throw new CustomApiException(new OrderProblemDetail()
-                                         {
-                                             OrderId = 3,
-                                             Detail = "Order cannot be found!",
-                                             Status = (int)HttpStatusCode.NotFound,
-                                             Title = "Order Error!"
-                                         });
+            {
+                OrderId = 3,
+                Detail = "Order cannot be found!",
+                Status = (int)HttpStatusCode.NotFound,
+                Title = "Order Error!"
+            });
         }
 
         [HttpGet("v6")]
         public string GetV6()
         {
             var validationProblemDetails = new ValidationProblemDetails()
-                                           {
-                                               Detail = "Error while creating account. Please see errors for detail.",
-                                               Status = (int)HttpStatusCode.BadRequest,
-                                               Title = "Register Error"
-                                           };
+            {
+                Detail = "Error while creating account. Please see errors for detail.",
+                Status = (int)HttpStatusCode.BadRequest,
+                Title = "Register Error"
+            };
 
             validationProblemDetails.Errors.Add("Email", new string[]
                                                          {

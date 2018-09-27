@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\GlobalExceptionFilter.Core.csproj" />
     <ProjectReference Include="..\GlobalExceptionFilter\GlobalExceptionFilter.csproj" />
   </ItemGroup>
 

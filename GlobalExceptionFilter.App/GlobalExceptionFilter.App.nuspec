@@ -17,6 +17,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\netcoreapp2.1\GlobalExceptionFilter.Core.dll"  target="lib/dotnet" />
+    <file src="bin\Release\netcoreapp2.1\GlobalExceptionFilter.App.dll"  target="lib/dotnet" />
   </files>
 </package>

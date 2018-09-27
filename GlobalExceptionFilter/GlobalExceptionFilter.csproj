@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\GlobalExceptionFilter.Core.csproj" />
+    <ProjectReference Include="..\GlobalExceptionFilter.App\GlobalExceptionFilter.App.csproj" />
   </ItemGroup>
 
 </Project>

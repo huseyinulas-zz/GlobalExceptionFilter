@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core
+namespace App
 {
     public class CustomApiException : Exception
     {
