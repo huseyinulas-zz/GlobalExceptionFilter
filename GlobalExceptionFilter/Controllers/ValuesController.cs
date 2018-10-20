@@ -64,17 +64,28 @@ namespace GlobalExceptionFilter.Controllers
             };
 
             validationProblemDetails.Errors.Add("Email", new string[]
-                                                         {
-                                                             "Email address length must be greater than 5 characters",
-                                                             "Email address must be email format"
-                                                         });
+            {
+                "Email address length must be greater than 5 characters",
+                "Email address must be email format"
+            });
 
             validationProblemDetails.Errors.Add("Age", new string[]
-                                                       {
-                                                           "Age must be minimum 18"
-                                                       });
+            {
+                "Age must be minimum 18"
+            });
 
             throw new CustomApiException(validationProblemDetails);
+        }
+
+        [HttpGet("v7")]
+        public string GetV7()
+        {
+            throw new CustomApiException(new ProblemDetails()
+            {
+                Detail = "An error occurred while processing your request",
+                Status = (int)HttpStatusCode.InternalServerError,
+                Title = "Server Error!"
+            });
         }
     }
 

@@ -20,13 +20,12 @@ namespace App
 
         public void OnException(ExceptionContext context)
         {
-            logger.LogError(new EventId(context.Exception.HResult),
-                            context.Exception,
-                            context.Exception.Message);
+            Log(context);
 
             if (context.Exception.GetType() == typeof(CustomApiException))
             {
                 var exception = (CustomApiException)context.Exception;
+
                 exception.ProblemDetails.Instance = context.HttpContext.Request.Path;
 
                 context.Result = new ObjectResult(exception.ProblemDetails);
@@ -35,9 +34,9 @@ namespace App
             else
             {
                 var json = new JsonErrorResponse
-                           {
-                               Messages = new[] { "An error occurred while processing your request" }
-                           };
+                {
+                    Messages = new[] { "An error occurred while processing your request" }
+                };
 
                 if (env.IsDevelopment())
                 {
@@ -48,6 +47,27 @@ namespace App
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
             context.ExceptionHandled = true;
+        }
+
+        private void Log(ExceptionContext context)
+        {
+            if (context.Exception.GetType() == typeof(CustomApiException))
+            {
+                var exception = (CustomApiException)context.Exception;
+
+                if (exception.ProblemDetails.Status < 500 && exception.ProblemDetails.Status >= 400)
+                {
+                    logger.LogInformation(new EventId(context.Exception.HResult), context.Exception, context.Exception.Message);
+                }
+                else
+                {
+                    logger.LogError(new EventId(context.Exception.HResult), context.Exception, context.Exception.Message);
+                }
+            }
+            else
+            {
+                logger.LogError(new EventId(context.Exception.HResult), context.Exception, context.Exception.Message);
+            }
         }
     }
 }
