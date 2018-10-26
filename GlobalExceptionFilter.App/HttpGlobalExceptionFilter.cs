@@ -51,11 +51,11 @@ namespace App
 
         private void Log(ExceptionContext context)
         {
-            if (context.Exception.GetType() == typeof(CustomApiException))
+            if (context.Exception is CustomApiException customApiException)
             {
                 var exception = (CustomApiException)context.Exception;
 
-                if (exception.ProblemDetails.Status < 500 && exception.ProblemDetails.Status >= 400)
+                if (exception.ProblemDetails.Status < (int)HttpStatusCode.InternalServerError && exception.ProblemDetails.Status >= (int)HttpStatusCode.BadRequest)
                 {
                     logger.LogInformation(new EventId(context.Exception.HResult), context.Exception, context.Exception.Message);
                 }
