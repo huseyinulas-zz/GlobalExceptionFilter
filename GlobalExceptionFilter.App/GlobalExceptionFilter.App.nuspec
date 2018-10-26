@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>GlobalExceptionFilter</id>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <title>GlobalExceptionFilter</title>
     <authors>Huseyin Ulas</authors>
     <owners>Huseyin Ulas</owners>
