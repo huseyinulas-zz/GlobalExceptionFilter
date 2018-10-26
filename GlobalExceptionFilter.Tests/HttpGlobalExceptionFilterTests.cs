@@ -75,5 +75,15 @@ namespace GlobalExceptionFilter.Tests
 
             apiResponse.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
         }
+
+        [Test]
+        public async Task Endpoint_ReturnInternalServerErrorResponse_CustomApiExceptionWasThrownsWithInternalServerError()
+        {
+            HttpResponseMessage apiResponse = await _client.GetAsync("/api/values/v7");
+
+            await apiResponse.Content.ReadAsStringAsync();
+
+            apiResponse.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
+        }
     }
 }
