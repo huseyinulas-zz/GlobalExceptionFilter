@@ -22,14 +22,12 @@ namespace App
         {
             Log(context);
 
-            if (context.Exception.GetType() == typeof(CustomApiException))
+            if (context.Exception is CustomApiException customApiException)
             {
-                var exception = (CustomApiException)context.Exception;
+                customApiException.ProblemDetails.Instance = context.HttpContext.Request.Path;
 
-                exception.ProblemDetails.Instance = context.HttpContext.Request.Path;
-
-                context.Result = new ObjectResult(exception.ProblemDetails);
-                context.HttpContext.Response.StatusCode = exception.ProblemDetails.Status.Value;
+                context.Result = new ObjectResult(customApiException.ProblemDetails);
+                context.HttpContext.Response.StatusCode = customApiException.ProblemDetails.Status.Value;
             }
             else
             {
@@ -53,9 +51,7 @@ namespace App
         {
             if (context.Exception is CustomApiException customApiException)
             {
-                var exception = (CustomApiException)context.Exception;
-
-                if (exception.ProblemDetails.Status < (int)HttpStatusCode.InternalServerError && exception.ProblemDetails.Status >= (int)HttpStatusCode.BadRequest)
+                if (customApiException.ProblemDetails.Status < (int)HttpStatusCode.InternalServerError && customApiException.ProblemDetails.Status >= (int)HttpStatusCode.BadRequest)
                 {
                     logger.LogInformation(new EventId(context.Exception.HResult), context.Exception, context.Exception.Message);
                 }
